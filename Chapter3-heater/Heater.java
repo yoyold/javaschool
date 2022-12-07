@@ -1,59 +1,90 @@
 
 /**
  * @author (L.Dony) 
- * @version (v1 07.12.22)
+ * @version (v2 07.12.22)
  */
 public class Heater
 {
-    // Instanzvariablen - ersetzen Sie das folgende Beispiel mit Ihren Variablen
-    private int temperature, min, max, increment;
+    private float temperature, min, max, increment;
 
     /**
      * constructor
      */
-    public Heater(int maxtemp, int mintemp)
+    public Heater(float starttemp, float maxtemp, float mintemp)
     {
-        temperature = 15;
+        temperature = starttemp;
         min = mintemp;
         max = maxtemp;
         increment = 5;
-        if (!isValidTemperature()){
-            System.out.println("temperature must be between min and max!");
+        if (!isValidTemperature())
+        {
+            min = temperature--;
+            max = temperature++;
         }
     }
     
-    public int getTemp()
+    public float getTemp()
     {
         return temperature;
     }
+    
+    public void setTemp(float newtemp)
+    {
+        if (isValidTemperature())
+        {
+            temperature =  newtemp;   
+        }
+    }
+
 
     public void warmer()
     {
         if (temperature  + increment <= max)
         {
-        temperature = temperature + increment;
+            temperature = temperature + increment;
+        }
+        else
+        {
+            System.out.println("This would exceed the max temperature!");
         }
     }
     
     public void colder()
     {
-        {
+        
         if (temperature  + increment >= min)
-        temperature = temperature - increment;
+        {
+            temperature = temperature - increment;
+        }
+        else
+        {
+            System.out.println("This would exceed the min temperature!");
         }
     }
     
-    public void setIncrement(int newinc)
+    public void setIncrement(float newinc)
     {
-        increment = newinc;   
+        if (newinc > 0)
+        {
+            increment = newinc;   
+        }
+        else 
+        {
+            System.out.println("increment must be greater than 0!");
+        }
     }
     
+    // temperature must be between min and max
     public boolean isValidTemperature()
     {
         if (min <= temperature && max >= temperature){
             return true;
         }
-        else return false;
+        else 
+        {
+            System.out.println("temperature must be between min and max!");
+            return false;   
+        }
     }
     
 }
