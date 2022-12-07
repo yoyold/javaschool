@@ -15,7 +15,7 @@ public class Heater
         temperature = starttemp;
         min = mintemp;
         max = maxtemp;
-        increment = 5;
+        increment = 5.0f;
         if (!isValidTemperature())
         {
             min = temperature--;
